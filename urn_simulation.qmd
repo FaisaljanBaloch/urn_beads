@@ -11,4 +11,4 @@ execute:
 library(tidyverse)
 ```
 
-From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red.
+From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red. Collecting samples from the population may contains bias, so it is important to mix the urn before taking samples.
