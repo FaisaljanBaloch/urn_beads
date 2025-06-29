@@ -9,6 +9,54 @@ execute:
 ```{r}
 #| message: false
 library(tidyverse)
+library(tidymodels)
+library(broom)
+library(knitr)
 ```
 
-From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red. Collecting samples from the population may contains bias, so it is important to mix the urn before taking samples.
+From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red. Collecting samples from the population may contains bias, so it is important to mix the urn before taking samples. I model the probability of bead being red, is a binary outcome variable that has two values; red and white, as a logistic function based on the observed distribution in the urn or in shovel samples.
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon
+$$
+
+$$
+\hat{Y} = \hat{\text{color}} = \frac{1}{1 + \exp\left(0.663 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon\right)}
+$$
+
+```{r}
+#| cache: true
+
+urn <- tibble(color = c(rep("red", 400), rep("white", 600))) |>
+  mutate(color = as.factor(color))
+
+shovel <- slice_sample(urn, n = 50)
+
+fit_color <- logistic_reg(engine = "glm") |> fit(color ~ 1, data = shovel)
+```
+
+```{r}
+fit_color |> tidy(conf.int = TRUE) |>
+  mutate(
+    estimate = round(estimate, 3),
+    std.error = round(std.error, 3),
+    statistic = round(statistic, 3),
+    p.value = round(p.value, 3),
+    conf.low = round(conf.low, 3),
+    conf.high = round(conf.high, 3)
+  ) |>
+  select(
+    Term = term,
+    Estimate = estimate,
+    `Std. Error` = std.error,
+    `z-Statistic` = statistic,
+    `p-value` = p.value,
+    `CI Low` = conf.low,
+    `CI High` = conf.high
+  ) |>
+  kable(
+    caption = "Logistic Regression Coefficient Summary",
+    digits = 3,
+    align = "c"
+  )
+```
