@@ -99,13 +99,6 @@ window.Quarto = {
 </header>
 
 
-<p>From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red. Collecting samples from the population may contains bias, so it is important to mix the urn before taking samples. I model the probability of bead being red, is a binary outcome variable that has two values; red and white, as a logistic function based on the observed distribution in the urn or in shovel samples.</p>
-<p><span class="math display">\[
-Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon
-\]</span></p>
-<p><span class="math display">\[
-\hat{Y} = \hat{\text{color}} = \frac{1}{1 + \exp\left(0.663 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon\right)}
-\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -144,6 +137,26 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon
 </table>
 </div>
 </div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: No shared levels found between `names(values)` of the manual scale and the
+data's fill values.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="urn_simulation_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From a lot of beads in a urn, it will probably be costly to find the proportion of a specific color of beads. Using 1,000 beads of color white and red in a simulated urn, I seek to predict what proportion of beads are red. Collecting samples from the population may contains bias, so it is important to mix the urn before taking samples. I model the probability of bead being red, is a binary outcome variable that has two values; red and white, as a logistic function based on the observed distribution in the urn or in shovel samples. Red beads are predicted at around 46% in proportion of overall beads in urn, with a 95% confidence interval ranging from 21% to 47%.</p>
+<p><span class="math display">\[
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon
+\]</span></p>
+<p><span class="math display">\[
+\hat{Y} = \hat{\text{color}} = \frac{1}{1 + \exp\left(0.663 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \varepsilon\right)}
+\]</span></p>
 
 </main>
 <!-- /main column -->
